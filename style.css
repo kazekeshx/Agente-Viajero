@@ -109,7 +109,7 @@ input[type="number"] {
 
     button,
     input {
-        width: 100%;
+        width: 90%;
         /* Full-width buttons on small screens */
         padding: 0.2rem;
     }
