@@ -46,6 +46,7 @@
     <p id="resultado"></p>
 
     <script>
+
         let matriz = [];
         let n;
         let network, finalNetwork;
@@ -57,7 +58,7 @@
 
             for (let i = 0; i < n; i++) {
                 for (let j = i + 1; j < n; j++) {
-                    let valor = Math.floor(Math.random() * 100)+1;
+                    let valor = Math.floor(Math.random() * 100) + 1;
                     matriz[i][j] = valor;
                     matriz[j][i] = valor;
                 }
@@ -107,7 +108,9 @@
             }
             mostrarMatriz();
             mostrarGrafoInicial();
+            
             document.getElementById("manual-input").style.display = 'none';
+           
         }
 
         // Muestra la matriz de adyacencia en la página
@@ -132,14 +135,15 @@
 
         // Muestra el grafo inicial usando vis.js
         function mostrarGrafoInicial() {
+
             const nodes = [];
             const edges = [];
-        
+
             const espacio = 400; // Longitud de separación entre nodos
             for (let i = 0; i < n; i++) {
                 nodes.push({ id: i + 1, label: `Nodo ${i + 1}`, shape: 'ellipse', x: (i % 4) * espacio, y: Math.floor(i / 4) * espacio });
             }
-        
+
             for (let i = 0; i < n; i++) {
                 for (let j = i + 1; j < n; j++) {
                     if (matriz[i][j] !== 0) {  // Solo dibuja la arista si el valor no es 0
@@ -147,13 +151,13 @@
                     }
                 }
             }
-        
+
             const container = document.getElementById('mynetwork');
             const data = {
                 nodes: new vis.DataSet(nodes),
                 edges: new vis.DataSet(edges)
             };
-        
+
             const options = {
                 nodes: {
                     shape: 'ellipse',
@@ -183,6 +187,8 @@
             };
             encontrarCiclo();
             const network = new vis.Network(container, data, options);
+            document.querySelector('canvas').width = 1020;
+            document.querySelector('canvas').height = 700;
         }
 
         let cicloActual = [];
@@ -224,6 +230,8 @@
 
             mostrarResultado(ciclo, totalDistancia);
             mostrarGrafoFinal(ciclo, totalDistancia);
+            document.querySelector('canvas').width = 1020;
+            document.querySelector('canvas').height = 700;
         }
 
         // Muestra el ciclo hamiltoniano mínimo y actualiza el grafo final
@@ -235,24 +243,24 @@
         function mostrarGrafoFinal(ciclo, distanciaTotal) {
             const nodes = [];
             const edges = [];
-        
+
             const espacio = 400; // Longitud de separación entre nodos
             for (let i = 0; i < n; i++) {
                 nodes.push({ id: i + 1, label: `Nodo ${i + 1}`, shape: 'ellipse', x: (i % 4) * espacio, y: Math.floor(i / 4) * espacio });
             }
-        
+
             for (let i = 0; i < ciclo.length - 1; i++) {
                 if (matriz[ciclo[i]][ciclo[i + 1]] !== 0) {  // Solo dibuja la arista si el valor no es 0
                     edges.push({ from: ciclo[i] + 1, to: ciclo[i + 1] + 1, color: { color: 'black' }, label: matriz[ciclo[i]][ciclo[i + 1]].toString(), smooth: { type: 'continuous' } });
                 }
             }
-        
+
             const container = document.getElementById('myfinalnetwork');
             const data = {
                 nodes: new vis.DataSet(nodes),
                 edges: new vis.DataSet(edges)
             };
-        
+
             const options = {
                 nodes: {
                     shape: 'ellipse',
@@ -297,9 +305,10 @@
                     }
                 }
             };
-        
+
             const finalNetwork = new vis.Network(container, data, options);
         }
+
     </script>
 </body>
 
