@@ -97,7 +97,7 @@ input[type="number"] {
     }
 
     .grafos .container {
-        margin: 1rem 30px;
+     
         /* Reduce margin for smaller screens */
         height: 700px;
         /* Adjust height for smaller screens */
