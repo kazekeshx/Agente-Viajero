@@ -1,0 +1,108 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Graph and final network containers */
+#mynetwork,
+#myfinalnetwork {
+    width: 100%;
+    height: 100%;
+    border: 1px solid lightgray;
+    box-sizing: border-box; /* Ensure padding/border are included in the width/height */
+}
+
+/* Buttons and inputs styling */
+button, input {
+    margin: 5px;
+    padding: 1rem; /* Using relative units for padding */
+    font-size: 1rem; /* Ensure consistent sizing */
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Table styling */
+table {
+    margin: 45px auto;
+    border-collapse: collapse;
+    width: 90%; /* Allow more responsiveness */
+}
+
+td, th {
+    padding: 1rem; /* Relative padding */
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #00c3ff;
+    color: white;
+}
+
+/* Input for numbers */
+input[type="number"] {
+    padding: 0.5rem;
+    width: 3rem; /* More readable and adaptable to content */
+    font-size: 1rem;
+}
+
+/* Graph containers styling */
+.grafos {
+    display: flex;
+    width: 100%;
+    max-width: 1700px;
+    justify-content: center;
+    margin: auto;
+    height: 500px;
+    gap: 2rem; /* Better spacing between containers */
+}
+
+.grafos .container {
+    flex: 1; /* Allow flexible resizing of containers */
+    margin: 2rem;
+    height: 100%;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 1300px) {
+    .grafos {
+        flex-direction: column;
+        height: auto; /* Adjust height for stacking */
+    }
+
+    .grafos .container {
+        margin: 1rem 30px; /* Reduce margin for smaller screens */
+        height: 700px; /* Adjust height for smaller screens */
+    }
+}
+
+/* Further adjustments for mobile view */
+@media (max-width: 600px) {
+    button, input {
+        width: 100%; /* Full-width buttons on small screens */
+        padding: 0.8rem;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    td, th {
+        padding: 0.5rem; /* Reduce padding for better fit */
+    }
+
+    .grafos .container {
+        height: 250px; /* Smaller height for very small screens */
+    }
+}
+#resultado{
+    margin-top: 190px;
+    margin-bottom: 100px;
+    font-size: 30px;
+    font-weight:600;
+}
