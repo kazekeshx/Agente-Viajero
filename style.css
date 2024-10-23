@@ -15,7 +15,9 @@ body {
     width: 100%;
     height: 100%;
     border: 1px solid lightgray;
-    box-sizing: border-box;
+  canvas{
+    height: 500px;
+  }
     /* Ensure padding/border are included in the width/height */
 }
 
@@ -83,6 +85,10 @@ input[type="number"] {
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 1500px) {
+    #mynetwork,
+#myfinalnetwork{
+    min-height: 300px;
+}
     .grafos {
         flex-direction: column;
         height: auto;
@@ -119,7 +125,7 @@ input[type="number"] {
     }
 
     .grafos .container {
-        height: 250px;
+        height: 10px;
         /* Smaller height for very small screens */
     }
 }
