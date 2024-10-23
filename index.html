@@ -1,48 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ciclo Hamiltoniano Mínimo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        #mynetwork, #myfinalnetwork {
-            width: 800px;
-            height: 600px;
-            margin: 20px auto;
-            border: 1px solid lightgray;
-        }
-        button, input {
-            margin: 5px;
-            padding: 15px;
-        }
-        table {
-            margin: 45px auto;
-            border-collapse: collapse;
-
-        }
-        td, th {
-            padding: 15px;
-            border: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        input[type="number"] {
-           padding: 5px;
-           width: 30px;
-        }
-        .grafos{
-            display: flex;
-            
-            justify-content: space-evenly;
-        }
-    </style>
+    <link rel="stylesheet" href="./style.css">
     <script src="https://unpkg.com/vis-network@9.0.4/standalone/umd/vis-network.min.js"></script>
 </head>
+
 <body>
 
     <h1>Ciclo Hamiltoniano Mínimo</h1>
@@ -52,7 +18,7 @@
         <br>
         <button onclick="generarMatriz()">Generar Matriz Aleatoria</button>
         <button onclick="solicitarMatriz()">Ingresar Matriz Manualmente</button>
-       
+
     </div>
 
     <div id="manual-input" style="display: none;">
@@ -65,18 +31,17 @@
         <h2>Matriz de Adyacencia</h2>
         <div id="matriz-output"></div>
     </div>
-<div class="grafos">
-    <div>
-        <h2>Grafo Inicial</h2>
-        <div id="mynetwork"></div>
-    </div>
+    <div class="grafos">
+        <div class="container">
+            <h2>Grafo Inicial</h2>
+            <div id="mynetwork"></div>
+        </div>
 
-    <div>
-        <h2>Grafo del Ciclo Hamiltoniano Mínimo</h2>
-        <div id="myfinalnetwork"></div>
+        <div class="container">
+            <h2>Grafo del Ciclo Hamiltoniano Mínimo</h2>
+            <div id="myfinalnetwork"></div>
+        </div>
     </div>
-</div>
-    
 
     <p id="resultado"></p>
 
@@ -89,7 +54,7 @@
         function generarMatriz() {
             n = document.getElementById("n").value;
             matriz = Array.from({ length: n }, () => Array(n).fill(0));
-            
+
             for (let i = 0; i < n; i++) {
                 for (let j = i + 1; j < n; j++) {
                     let valor = Math.floor(Math.random() * 100) + 1;
@@ -132,12 +97,12 @@
             for (let i = 0; i < n; i++) {
                 for (let j = i + 1; j < n; j++) {
                     let valor = parseInt(document.getElementById(`cell-${i}-${j}`).value);
-                    if(valor<0){
-                        valor=0;
+                    if (valor < 0) {
+                        valor = 0;
                     }
                     matriz[i][j] = valor;
                     matriz[j][i] = valor;
-                    
+
                 }
             }
             mostrarMatriz();
@@ -152,7 +117,7 @@
                 matrizHtml += `<th>${i + 1}</th>`;
             }
             matrizHtml += '</tr>';
-        
+
             for (let i = 0; i < n; i++) {
                 matrizHtml += `<tr><th>${i + 1}</th>`;
                 for (let j = 0; j < n; j++) {
@@ -163,30 +128,30 @@
             matrizHtml += '</table>';
             document.getElementById("matriz-output").innerHTML = matrizHtml;
         }
-        
+
 
         // Muestra el grafo inicial usando vis.js
         function mostrarGrafoInicial() {
             const nodes = [];
             const edges = [];
-        
+
             const espacio = 400; // Longitud de separación entre nodos
             for (let i = 0; i < n; i++) {
                 nodes.push({ id: i + 1, label: `Nodo ${i + 1}`, shape: 'ellipse', x: (i % 4) * espacio, y: Math.floor(i / 4) * espacio });
             }
-        
+
             for (let i = 0; i < n; i++) {
                 for (let j = i + 1; j < n; j++) {
                     edges.push({ from: i + 1, to: j + 1, label: matriz[i][j].toString(), smooth: { type: 'continuous' } });
                 }
             }
-        
+
             const container = document.getElementById('mynetwork');
             const data = {
                 nodes: new vis.DataSet(nodes),
                 edges: new vis.DataSet(edges)
             };
-        
+
             const options = {
                 nodes: {
                     shape: 'ellipse',
@@ -268,22 +233,22 @@
         function mostrarGrafoFinal(ciclo, distanciaTotal) {
             const nodes = [];
             const edges = [];
-        
+
             const espacio = 400; // Longitud de separación entre nodos
             for (let i = 0; i < n; i++) {
                 nodes.push({ id: i + 1, label: `Nodo ${i + 1}`, shape: 'ellipse', x: (i % 4) * espacio, y: Math.floor(i / 4) * espacio });
             }
-        
+
             for (let i = 0; i < ciclo.length - 1; i++) {
                 edges.push({ from: ciclo[i] + 1, to: ciclo[i + 1] + 1, color: { color: 'black' }, label: matriz[ciclo[i]][ciclo[i + 1]].toString(), smooth: { type: 'continuous' } });
             }
-        
+
             const container = document.getElementById('myfinalnetwork');
             const data = {
                 nodes: new vis.DataSet(nodes),
                 edges: new vis.DataSet(edges)
             };
-        
+
             const options = {
                 nodes: {
                     shape: 'ellipse',
@@ -328,9 +293,10 @@
                     }
                 }
             };
-        
+
             const finalNetwork = new vis.Network(container, data, options);
         }
     </script>
 </body>
+
 </html>
